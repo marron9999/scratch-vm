@@ -489,7 +489,9 @@ const formatBlock = function (args, block, level) {
         else line += span_icon2(shape, '', color);
         line += '</span><span class=col2>';
         if(debug) line += '<sup class=debug>' + block.opcode + '</sup>';
-        line += '<span class=oo><span style="display:inline-block; border-color:' + color + ';">' + text + '</span></span>';
+        line += '<span class=oo><span style="display:inline-block; border-color:' + color + ';">';
+        line += text;
+        line += '</span></span>';
         line += '</span>';
         args.html.push(p(line, (toplevel)? 'top':''));
 
@@ -507,10 +509,15 @@ const formatBlock = function (args, block, level) {
 
             if(args.infos[block.opcode].substack > 1) {
                 args.line_no++;
-                line = span_lno(args.line_no);
+                line = '<span class=col1>';
+                line += span_lno(args.line_no);
                 line += span_line(args.colors, level);
                 line += span_icon2('ifelse', '', color);
+                line += '</span><span class=col2>';
+                line += '<span class=oo><span style="display:inline-block; border-color:' + color + ';">';
                 line += label(args.infos['control_else'].label);
+                line += '</span></span>';
+                line += '</span>';
                 args.html.push(p(line));
 
                 if(block.inputs.SUBSTACK2 != undefined
