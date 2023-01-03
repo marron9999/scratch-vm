@@ -574,6 +574,11 @@ const serialize = function (runtime, targetId) {
     if (runtime.origin) {
         meta.origin = runtime.origin;
     }
+//{{ #5
+	if (runtime.extend) {
+		meta.extend = JSON.stringify(runtime.extend);
+	}
+//}} #5
 
     // Attach full user agent string to metadata if available
     meta.agent = 'none';
@@ -1254,6 +1259,14 @@ const deserialize = function (json, runtime, zip, isSingleSprite) {
     } else {
         runtime.origin = null;
     }
+
+//{{ #5
+	if (json.meta && json.meta.extend) {
+		runtime.extend = JSON.parse(json.meta.extend);
+	} else {
+		runtime.extend = null;
+	}
+//}} #5
 
     // First keep track of the current target order in the json,
     // then sort by the layer order property before parsing the targets

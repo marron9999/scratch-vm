@@ -25,6 +25,10 @@ const {loadSound} = require('./import/load-sound.js');
 const {serializeSounds, serializeCostumes} = require('./serialization/serialize-assets');
 require('canvas-toBlob');
 
+//{{ #5
+const uid = require('./util/uid');
+//}} #5
+
 const RESERVED_NAMES = ['_mouse_', '_stage_', '_edge_', '_myself_', '_random_'];
 
 const CORE_EXTENSIONS = [
@@ -166,6 +170,11 @@ class VirtualMachine extends EventEmitter {
         this.flyoutBlockListener = this.flyoutBlockListener.bind(this);
         this.monitorBlockListener = this.monitorBlockListener.bind(this);
         this.variableListener = this.variableListener.bind(this);
+
+//{{ #5
+		this.generateUid = uid;
+		this.runtime.extend = { uniqueId: this.generateUid() };
+//}} #5
     }
 
     /**
@@ -351,7 +360,13 @@ class VirtualMachine extends EventEmitter {
 
         return validationPromise
             .then(validatedInput => this.deserializeProject(validatedInput[0], validatedInput[1]))
-            .then(() => this.runtime.emitProjectLoaded())
+            .then(() => {
+//{{ #5
+				if(this.runtime.extend == null)
+					this.runtime.extend = { uniqueId: this.generateUid() };
+//}} #5
+				this.runtime.emitProjectLoaded();
+			})
             .catch(error => {
                 // Intentionally rejecting here (want errors to be handled by caller)
                 if (error.hasOwnProperty('validationError')) {

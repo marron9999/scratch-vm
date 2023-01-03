@@ -400,6 +400,10 @@ class Runtime extends EventEmitter {
          */
         this.origin = null;
 
+//{{ #5
+		this.extend = null;
+//}} #5
+
         this._initScratchLink();
     }
 
