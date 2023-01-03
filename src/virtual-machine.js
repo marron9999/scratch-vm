@@ -408,6 +408,13 @@ class VirtualMachine extends EventEmitter {
         });
     }
 
+//{{ #2
+    htmlProjectSb3 (title, infos) {
+        const sb3 = require('./serialization/sb3-html');
+        return sb3.format(title, infos, this.runtime);
+    }
+//}} #2
+
     /*
      * @type {Array<object>} Array of all costumes and sounds currently in the runtime
      */
