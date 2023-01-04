@@ -39,6 +39,10 @@ class Scratch3ControlBlocks {
             control_incr_counter: this.incrCounter,
             control_clear_counter: this.clearCounter,
             control_all_at_once: this.allAtOnce
+//{{ #9
+            , control_output: this.output
+            , control_clear: this.clear
+//}} #9
         };
     }
 
@@ -201,6 +205,16 @@ class Scratch3ControlBlocks {
         // removed before the release of 2.0.)
         util.startBranch(1, false);
     }
+
+//{{ #9
+    output (args) {
+        let v = args.STRING;
+        this.runtime.outputWrite(v);
+    }
+    clear () {
+        this.runtime.outputClear();
+    }
+//}} #9
 }
 
 module.exports = Scratch3ControlBlocks;

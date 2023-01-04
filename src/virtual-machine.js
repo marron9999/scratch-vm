@@ -98,6 +98,12 @@ class VirtualMachine extends EventEmitter {
         this.runtime.on(Runtime.PROJECT_CHANGED, () => {
             this.emit(Runtime.PROJECT_CHANGED);
         });
+//{{ #9
+        this.runtime.on(Runtime.PROJECT_LOADED, () => {
+            this.emit(Runtime.PROJECT_LOADED);
+        });
+//}} #9
+
         this.runtime.on(Runtime.VISUAL_REPORT, visualReport => {
             this.emit(Runtime.VISUAL_REPORT, visualReport);
         });

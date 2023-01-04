@@ -404,6 +404,11 @@ class Runtime extends EventEmitter {
 		this.extend = null;
 //}} #5
 
+//{{ #9
+		this.outputClear = function() { };
+		this.outputWrite = function() { };
+//}} #9
+
         this._initScratchLink();
     }
 
