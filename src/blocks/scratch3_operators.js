@@ -37,6 +37,9 @@ class Scratch3OperatorsBlocks {
 //{{ #6
             , operator_eval: this.eval
 //}} #6
+//{{ #8
+            , operator_trim: this.trim
+//}} #8
         };
     }
 
@@ -164,6 +167,12 @@ class Scratch3OperatorsBlocks {
         return v;
     }
 //}} #6
+//{{ #8
+    trim (args) {
+        let v = args.STRING;
+        return v.trim();
+    }
+//}} #8
 }
 
 module.exports = Scratch3OperatorsBlocks;
