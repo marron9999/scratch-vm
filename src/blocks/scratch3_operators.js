@@ -34,6 +34,9 @@ class Scratch3OperatorsBlocks {
             operator_mod: this.mod,
             operator_round: this.round,
             operator_mathop: this.mathop
+//{{ #6
+            , operator_eval: this.eval
+//}} #6
         };
     }
 
@@ -149,6 +152,18 @@ class Scratch3OperatorsBlocks {
         }
         return 0;
     }
+
+//{{ #6
+    eval (args) {
+        let v = args.STRING;
+        try {
+            eval("v = \"" + v + "\";");
+        } catch(e) {
+            // none
+        }
+        return v;
+    }
+//}} #6
 }
 
 module.exports = Scratch3OperatorsBlocks;
